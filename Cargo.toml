@@ -3,4 +3,12 @@ name = "temp_converter"
 version = "0.1.0"
 edition = "2021"
 
+[lib]
+name = "temp_converter_lib"
+path = "src/lib/mod.rs"
+
+[[bin]]
+name = "temp_converter_bin"
+path = "src/bin/main.rs"
+
 [dependencies]

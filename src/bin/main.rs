@@ -1,7 +1,5 @@
 use std::io;
-
-const FACTOR: f64 = 1.8;
-
+use temp_converter_lib::converter;
 
 fn read_input() -> String {
 
@@ -13,38 +11,6 @@ fn read_input() -> String {
     input.trim().to_string()
 }
 
-fn celsius_to_fahrenheit(c: f64) -> f64 {
-    c * FACTOR + 32.0
-}
-
-fn fahrenheit_to_celsius(f: f64) -> f64 {
-    (f - 32.0) / FACTOR
-}
-
-fn temp_conv(input: &str) -> Option<(f64, char)> {
-
-
-    let letter = match input.chars().rev().next() {
-
-        Some(letter_pos) => letter_pos,
-        None => return None,
-    };
-
-
-    let float_part = &input[..input.len() - 1];
-
-    match float_part.parse::<f64>() {
-        Ok(val) => {
-            let result = match letter {
-                'C' => celsius_to_fahrenheit(val),
-                'F' => fahrenheit_to_celsius(val),
-                _ => return None,
-            };
-            Some((result, letter))
-        },
-        Err(_) => None,
-    }
-}
 
 fn print_res(tup: (f64, char)) {
 
@@ -58,7 +24,6 @@ fn print_res(tup: (f64, char)) {
 }
     
 
-
 fn main() {
 
 
@@ -69,7 +34,7 @@ fn main() {
 
         let input = read_input();
         
-        match temp_conv(&input) {
+        match converter::temp_conv(&input) {
             Some(tup) => print_res(tup),
             None => {
                 println!("False input, retry again!");
